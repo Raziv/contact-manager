@@ -63,3 +63,10 @@ p {
   color: #fff;
   text-decoration: none;
 }
+
+.bttnStyle {
+  left: 50%;
+  position: absolute;
+  margin-top: 10px;
+  transform: translateX(-50%);
+}

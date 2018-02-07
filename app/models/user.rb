@@ -1,6 +1,6 @@
 class User < ApplicationRecord
-  has_many: groups
-  has_many: contacts
+  has_many :groups
+  has_many :contacts
 
   before_save { self.email = email.downcase }
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
