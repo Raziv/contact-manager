@@ -3,8 +3,17 @@
     <%= link_to "Mero Contacts", '#', id: "logo" %>
     <nav>
       <ul class="nav navbar-nav navbar-right">
-        <li><%= link_to "Log in", '#' %></li>
-        <li><%= link_to "Sign up", signup_path %></li>
+        <% if logged_in? %>
+            <% curr_user = User.find_by(id: session[:user_id]) %>
+            <li id="username"><%= curr_user.name %></li>
+            <li><%= link_to "Log out", logout_path, method: :delete %></li>
+        <% else %>
+          <li><%= link_to "Log in", login_path, class: "navbarItem" %></li>
+          <li><%= link_to "Sign up", signup_path, class: "navbarItem" %></li>
+        <% end %>
+
+        <!-- <li><%= link_to "Log in", login_path %></li>
+        <li><%= link_to "Sign up", signup_path %></li> -->
       </ul>
     </nav>
   </div>
