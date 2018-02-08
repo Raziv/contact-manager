@@ -1,20 +1,32 @@
-<header class="navbar navbar-fixed-top navbar-inverse">
-  <div class="container">
-    <%= link_to "Mero Contacts", '#', id: "logo" %>
-    <nav>
-      <ul class="nav navbar-nav navbar-right">
-        <% if logged_in? %>
-            <% curr_user = User.find_by(id: session[:user_id]) %>
-            <li id="username"><%= curr_user.name %></li>
-            <li><%= link_to "Log out", logout_path, method: :delete %></li>
-        <% else %>
-          <li><%= link_to "Log in", login_path, class: "navbarItem" %></li>
-          <li><%= link_to "Sign up", signup_path, class: "navbarItem" %></li>
-        <% end %>
+<!-- Menu bar -->
+<div class="container-fluid">
+  <div class="row customNavbar">
 
-        <!-- <li><%= link_to "Log in", login_path %></li>
-        <li><%= link_to "Sign up", signup_path %></li> -->
-      </ul>
-    </nav>
+    <div class="col-sm-4 col-xs-12 navbarTitle">
+      <%= link_to "Mero Contacts", '/', class:"titlePos" %>
+      <i class="glyphicon glyphicon-align-justify alignIcon"></i>
+      <i class="glyphicon glyphicon-search searchIcon"></i>
+    </div>
+
+    <div class="col-sm-4 col-xs-12 center searchBar">
+      <% if logged_in? %>
+        <%= form_tag("/search", method: :get) do %>
+          <%= text_field_tag :search, params[:search] %>
+          <%= submit_tag "Search", :name => nil, class: 'searchBttn' %>
+        <% end %>
+    <% end %>
+    </div>
+
+    <div class="col-sm-4 col-xs-12 navbarItems navBarItemMedia">
+      <% if logged_in? %>
+        <% curr_user = User.find_by(id: session[:user_id]) %>
+        <li id="username"><%= curr_user.name %></li>
+        <%= link_to "Log out", logout_path, method: :delete %>
+      <% else %>
+        <%= link_to "Log in", login_path, class: "navbarItem" %>
+        <%= link_to "Sign up", signup_path, class: "navbarItem" %>
+      <% end %>
+    </div>
+
   </div>
-</header>
+</div>

@@ -1,0 +1,48 @@
+<div class="panel panel-default">
+  <div class="panel-heading center">
+    <strong>Add Group</strong>
+  </div>
+
+  <%= form_for @group do |g| %>
+    <div class="panel-body">
+      <% if @group.errors.any? %>
+
+        <div class="row">
+          <div class="col-sm-6 col-sm-offset-3">
+            <div class="alert alert-danger">
+              <h3>Please correct this following errors:</h3>
+              <ul>
+                <% @group.errors.full_messages.each do |message| %>
+                  <li><%= message %></li>
+                <% end %>
+              </ul>
+            </div>
+          </div>
+        </div>
+      <% end %>
+
+      <div class="form-horizontal">
+        <div class="row">
+          <div class="col-sm-6 col-sm-offset-3">
+            <div class="form-group">
+              <%= g.label :name, class: "control-label col-sm-3" %>
+              <div class="col-sm-8">
+                <%= g.text_field :name, class: "form-control" %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel-footer">
+      <div class="row">
+        <div class="col-sm-6 col-sm-offset-3 center">
+          <button type="submit" class="btn btn-primary">Save</button>
+          <% @user = User.find_by(id: session[:user_id]) %>
+          <%= link_to "Cancel", user_path(@user.id), class: "btn btn-default" %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
