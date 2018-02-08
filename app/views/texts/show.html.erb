@@ -1,0 +1,43 @@
+<div class="panel panel-default">
+  <div class="panel-heading center">
+    <strong>Send SMS</strong>
+  </div>
+
+  <%= form_tag texts_path do |f| %>
+    <div class="panel-body">
+
+      <div class="form-horizontal">
+        <div class="row">
+          <div class="col-sm-6 col-sm-offset-3">
+            <div class="form-group">
+              <%= label_tag :to, 'To: ', class: "control-label col-sm-3" %>
+              <div class="col-sm-8">
+                <%= text_field_tag :sendto, @contact.phone, class: "form-control" %>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-sm-6 col-sm-offset-3">
+            <div class="form-group">
+              <%= label_tag :message, 'Message: ', class: "control-label col-sm-3" %>
+              <div class="col-sm-8">
+                <%= text_area_tag :message, '', class: "form-control" %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel-footer">
+      <div class="row">
+        <div class="col-sm-6 col-sm-offset-3 center">
+          <button type="submit" class="btn btn-primary">Send Text</button>
+        </div>
+      </div>
+    </div>
+
+  <% end %>
+</div>

@@ -1,0 +1,87 @@
+<%= form_for @contact do |f| %>
+    <div class="panel-body">
+
+      <% if @contact.errors.any? %>
+
+        <div class="row">
+          <div class="col-sm-6 col-sm-offset-3">
+            <div class="alert alert-danger">
+              <h3>Please correct this following errors:</h3>
+              <ul>
+                <% @contact.errors.full_messages.each do |message| %>
+                  <li><%= message %></li>
+                <% end %>
+              </ul>
+            </div>
+          </div>
+        </div>
+      <% end %>
+
+      <div class="form-horizontal">
+        <div class="row">
+          <div class="col-sm-6 col-sm-offset-3">
+            <div class="form-group">
+              <%= f.label :name, class: "control-label col-sm-3" %>
+              <div class="col-sm-8">
+                <%= f.text_field :name, class: "form-control" %>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <%= f.label :company, class: "control-label col-sm-3" %>
+              <div class="col-sm-8">
+                <%= f.text_field :company, class: "form-control" %>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <%= f.label :email, class: "control-label col-sm-3" %>
+              <div class="col-sm-8">
+                <%= f.text_field :email, class: "form-control" %>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <%= f.label :phone, class: "control-label col-sm-3" %>
+              <div class="col-sm-8">
+                <%= f.text_field :phone, class: "form-control" %>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <%= f.label :address, class: "control-label col-sm-3" %>
+              <div class="col-sm-8">
+                <%= f.text_area :address, class: "form-control" %>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <%= f.label :group, class: "control-label col-sm-3" %>
+              <div class="col-sm-8">
+                  <% @groups = Group.where(user_id: session[:user_id])%>
+                  <% options = options_from_collection_for_select(
+                      @groups, 'id', 'name', @contact.group_id
+                     )
+                  %>
+                  <%= f.select :group_id, options,
+                    { include_blank: "Select Group" }, { class: 'form-control' }
+                  %>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel-footer">
+      <div class="row">
+        <div class="col-sm-6 col-sm-offset-3 center">
+          <button type="submit" class="btn btn-primary">Save</button>
+          <% @user = User.find_by(id: session[:user_id]) %>
+          <%= link_to "Cancel", user_path(@user.id), class: "btn btn-default" %>
+        </div>
+      </div>
+    </div>
+
+  <% end %>
